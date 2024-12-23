@@ -1,0 +1,13 @@
+{
+	"cocktail": false,
+	"ordinary_drink": false,
+	"punch": false,
+	"shake": false,
+	"other": false,
+	"cocoa": false,
+	"shot": false,
+	"coffee_tea": false,
+	"homemade_liqueur": false,
+	"beer": false,
+	"soft_drink": false
+}

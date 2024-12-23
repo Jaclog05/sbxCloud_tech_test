@@ -1,0 +1,29 @@
+.selectDropdown {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .selectDropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .selectDropdown option[disabled] {
+    color: #999;
+  }
+  
+  .selectDropdown option {
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .selectDropdown:hover {
+    cursor: pointer;
+  }
+  

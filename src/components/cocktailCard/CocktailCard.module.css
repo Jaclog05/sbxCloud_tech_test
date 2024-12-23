@@ -1,0 +1,35 @@
+.card {
+    display: flex;
+    max-width: 200px;
+    height: 200px;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    background-color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardTitle {
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 140px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
