@@ -9,7 +9,7 @@ function NavBar() {
   const { logout } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
-  const {searchTerm, handleChange} = useCocktailContext()
+  const {searchTerm, setSearchTerm} = useCocktailContext()
 
 
   if(location.pathname === '/login' || location.pathname === '/sign_up') {
@@ -31,7 +31,7 @@ function NavBar() {
         type="text"
         placeholder="Search for cocktails..."
         value={searchTerm}
-        onChange={handleChange}
+        onChange={(e) => setSearchTerm(e.target.value)}
         className={styles.searchBar}
       />
       <div className={styles.links}>

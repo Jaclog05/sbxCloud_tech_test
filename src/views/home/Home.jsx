@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 import CocktailCard from '../../components/cocktailCard/cocktailCard'
 import { useCocktailContext } from '../../context/CocktailContext';
@@ -8,63 +8,7 @@ import cocktailsCategories from '../../data/cocktailsCategories.json';
 
 function Home() {
 
-  const [data, setData] = useState({
-    cocktailsList: null,
-    ingredientsList: null
-  })
-  const {searchTerm, filterCategoryValue} = useCocktailContext();
-
-  useEffect(() => {
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
-
-      .then(response => response.json())
-      .then(res => setData((prevData) => {
-        return {
-          ...prevData,
-          ingredientsList: res.drinks
-        }
-      }))
-  }, [])
-
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      if (searchTerm.trim() === '') {
-        const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail');
-        const data = await response.json();
-        setData((prevData) => {
-          return {
-            ...prevData,
-            cocktailsList: data.drinks
-          }
-        });
-      } else {
-        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`);
-        const data = await response.json();
-        setData((prevData) => {
-          return {
-            ...prevData,
-            cocktailsList: data.drinks
-          }
-        });
-      }
-    };
-
-    fetchSearchResults();
-  }, [searchTerm])
-
-  useEffect(() => {
-    if(filterCategoryValue.length){
-      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterCategoryValue}`)
-
-      .then(response => response.json())
-      .then(res => setData((prevData) => {
-        return {
-          ...prevData,
-          cocktailsList: res.drinks
-        }
-      }))
-    }
-  }, [filterCategoryValue])
+  const {data, filterCategoryValue} = useCocktailContext();
 
   return (
     <div>

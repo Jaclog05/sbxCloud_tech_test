@@ -3,11 +3,11 @@ import { useCocktailContext } from '../../context/CocktailContext'
 import styles from './DropDownMenu.module.css';
 
 function DropDownMenu({options, value}) {
-    const { handleChangeFilterCategory } = useCocktailContext();
+    const { setFilterCategoryValue } = useCocktailContext();
   return (
     <select
         value={value}
-        onChange = { handleChangeFilterCategory }
+        onChange = {(e) => setFilterCategoryValue(e.target.value)}
         className={styles.selectDropdown}
     >
       <option disabled value="">Select cocktail type</option>
