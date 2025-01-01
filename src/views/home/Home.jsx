@@ -8,15 +8,22 @@ import cocktailsCategories from '../../data/cocktailsCategories.json';
 
 function Home() {
 
-  const [cocktailsList, setCocktailsList] = useState(null)
-  const [ingredientsList, setIngredientsList] = useState(null)
+  const [data, setData] = useState({
+    cocktailsList: null,
+    ingredientsList: null
+  })
   const {searchTerm, filterCategoryValue} = useCocktailContext();
 
   useEffect(() => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
 
       .then(response => response.json())
-      .then(res => setIngredientsList(res.drinks))
+      .then(res => setData((prevData) => {
+        return {
+          ...prevData,
+          ingredientsList: res.drinks
+        }
+      }))
   }, [])
 
   useEffect(() => {
@@ -24,11 +31,21 @@ function Home() {
       if (searchTerm.trim() === '') {
         const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail');
         const data = await response.json();
-        setCocktailsList(data.drinks);
+        setData((prevData) => {
+          return {
+            ...prevData,
+            cocktailsList: data.drinks
+          }
+        });
       } else {
         const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`);
         const data = await response.json();
-        setCocktailsList(data.drinks);
+        setData((prevData) => {
+          return {
+            ...prevData,
+            cocktailsList: data.drinks
+          }
+        });
       }
     };
 
@@ -40,7 +57,12 @@ function Home() {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterCategoryValue}`)
 
       .then(response => response.json())
-      .then(res => setCocktailsList(res.drinks))
+      .then(res => setData((prevData) => {
+        return {
+          ...prevData,
+          cocktailsList: res.drinks
+        }
+      }))
     }
   }, [filterCategoryValue])
 
@@ -56,8 +78,8 @@ function Home() {
         <div className={styles.ingredients}>
           <h4>Ingredients List</h4>
           {
-            ingredientsList ? (
-              ingredientsList.map(ingredient => (
+            data.ingredientsList ? (
+              data.ingredientsList.map(ingredient => (
                 <Link key={ingredient.strIngredient1} to={`ingredient/${ingredient.strIngredient1}`}>
                   <h5>{ingredient.strIngredient1}</h5>
                 </Link>
@@ -67,11 +89,11 @@ function Home() {
           )}
         </div>
         <div className={styles.grid}>
-          {cocktailsList ? (
-            typeof cocktailsList == 'string' ? (
-              <h1 className={styles.noDataText}>{cocktailsList} ❌</h1>
+          {data.cocktailsList ? (
+            typeof data.cocktailsList == 'string' ? (
+              <h1 className={styles.noDataText}>{data.cocktailsList} ❌</h1>
             ) : (
-              cocktailsList.map(cocktail => (
+              data.cocktailsList.map(cocktail => (
                 <Link className={styles.link} key={cocktail.idDrink} to={`cocktail/${cocktail.idDrink}`}>
                   <CocktailCard
                     name={cocktail.strDrink}
