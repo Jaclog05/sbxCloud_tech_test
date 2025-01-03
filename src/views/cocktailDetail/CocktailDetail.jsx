@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from "react-router";
 import styles from './CocktailDetail.module.css'
+import LoadingSpinner from '../../assets/loading_spinner.svg'
 
 function CocktailDetail() {
   const { cocktailId } = useParams()
@@ -14,7 +15,7 @@ function CocktailDetail() {
   return (
     <>
       {
-        cocktailDetail ? 
+        cocktailDetail ?
         <div className={styles.container}>
             <header className={styles.header}>
               <h1>{cocktailDetail.strDrink}</h1>
@@ -51,7 +52,9 @@ function CocktailDetail() {
               </section>
             </div>
         </div>
-        : <h1 className={styles.loading}>Loading...</h1>
+        : <div className={styles.container}>
+            <img src={LoadingSpinner} alt="Loading Spinner" className={styles.loading} />
+          </div>
       }
     </>
   )

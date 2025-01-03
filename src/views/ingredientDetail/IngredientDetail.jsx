@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router'
 import styles from './IngredientDetail.module.css'
+import LoadingSpinner from '../../assets/loading_spinner.svg'
 
 function IngredientDetail() {
   const { ingredientName } = useParams()
@@ -42,7 +43,9 @@ function IngredientDetail() {
                           <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
                       ))
                     ) : (
-                      <h4>loading...</h4>
+                      <div className={styles.container}>
+                        <img src={LoadingSpinner} alt="Loading Spinner" className={styles.loading} />
+                      </div>
                     )}
                   </ul>
               </section>
@@ -54,7 +57,9 @@ function IngredientDetail() {
             </div>
 
         </div>
-        : <h1>Loading...</h1>
+        : <div className={styles.container}>
+            <img src={LoadingSpinner} alt="Loading Spinner" className={styles.loading} />
+          </div>
       }
     </>
   )
